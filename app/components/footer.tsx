@@ -1,19 +1,4 @@
-function ArrowIcon() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z"
-        fill="currentColor"
-      />
-    </svg>
-  )
-}
+import { FaLinkedin, FaGithub } from "react-icons/fa"; // Importing icons from react-icons
 
 export default function Footer() {
   return (
@@ -24,10 +9,10 @@ export default function Footer() {
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
-            href="/rss"
+            href="https://www.linkedin.com/in/adela-r-82a285184/"
           >
-            <ArrowIcon />
-            <p className="ml-2 h-7">rss</p>
+            <FaLinkedin className="text-lg" /> {/* LinkedIn Icon */}
+            <p className="ml-2 h-7">LinkedIn</p>
           </a>
         </li>
         <li>
@@ -35,27 +20,16 @@ export default function Footer() {
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://github.com/vercel/next.js"
+            href="https://github.com/adelaramadhina"
           >
-            <ArrowIcon />
-            <p className="ml-2 h-7">github</p>
-          </a>
-        </li>
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://vercel.com/templates/next.js/portfolio-starter-kit"
-          >
-            <ArrowIcon />
-            <p className="ml-2 h-7">view source</p>
+            <FaGithub className="text-lg" /> {/* GitHub Icon */}
+            <p className="ml-2 h-7">GitHub</p>
           </a>
         </li>
       </ul>
       <p className="mt-8 text-neutral-600 dark:text-neutral-300">
-        © {new Date().getFullYear()} MIT Licensed
+        © {new Date().getFullYear()}. With ♡ and Next.js
       </p>
     </footer>
-  )
+  );
 }

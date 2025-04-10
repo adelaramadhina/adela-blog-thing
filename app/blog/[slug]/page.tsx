@@ -12,22 +12,22 @@ export async function generateStaticParams() {
 }
 
 export function generateMetadata({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
-  if (!post) {
-    return
-  }
+  let post = getBlogPosts(true).find((post) => post.slug === params.slug)
+  if (!post) return
 
-  let {
+  const {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
+    hidden,
   } = post.metadata
-  let ogImage = image
+
+  const ogImage = image
     ? image
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`
 
-  return {
+  const baseMeta = {
     title,
     description,
     openGraph: {
@@ -36,11 +36,7 @@ export function generateMetadata({ params }) {
       type: 'article',
       publishedTime,
       url: `${baseUrl}/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -49,10 +45,23 @@ export function generateMetadata({ params }) {
       images: [ogImage],
     },
   }
+
+  // 🕵️ Add noindex if it's a hidden post
+  if (hidden) {
+    return {
+      ...baseMeta,
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }
+  }
+
+  return baseMeta
 }
 
 export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+  let post = getBlogPosts(true).find((post) => post.slug === params.slug)
 
   if (!post) {
     notFound()
